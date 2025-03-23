@@ -7,7 +7,7 @@ app.use(express.json());
 app.use(express.static('public'));
 
 // Connect to MongoDB Atlas
-mongoose.connect('mongodb+srv://mongodb+srv://carduser:cQGtChlVCuaUtiCK@digitalcardsender.sxecr.mongodb.net/?retryWrites=true&w=majority&appName=DigitalCardSender?retryWrites=true&w=majority', {
+mongoose.connect('mongodb+srv://carduser:cQGtChlVCuaUtiCK@digitalcardsender.sxecr.mongodb.net/digitalcards?retryWrites=true&w=majority&appName=DigitalCardSender', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
