@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { background: linear-gradient(45deg, #ffd1dc, #ff748c); height: 100vh; display: flex; justify-content: center; align-items: center; font-family: 'Arial', sans-serif; }
+    .container { width: 90%; max-width: 500px; padding: 20px; background: white; border-radius: 15px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); }
+    h2 { color: #ff4081; text-align: center; margin-bottom: 20px; }
+    input, textarea, button { display: block; width: 100%; margin: 10px 0; padding: 10px; font-size: 16px; }
+    button { background: #ff4081; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    button:hover { background: #e53975; }
+    #link-output { margin-top: 10px; text-align: center; color: #444; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Create a Cute Card</h2>
+    <form id="card-form">
+      <input type="text" id="recipient" placeholder="To: Loved One's Name" required>
+      <textarea id="message" placeholder="Your sweet message..." required></textarea>
+      <button type="submit">Generate Link</button>
+    </form>
+    <div id="link-output"></div>
+  </div>
+  <script>
+    document.getElementById('card-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const recipient = document.getElementById('recipient').value;
+      const message = document.getElementById('message').value;
+      const res = await fetch('/create', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ recipient, message })
+      });
+      const data = await res.json();
+      document.getElementById('link-output').innerHTML = `Share this: <a href="${data.link}">${data.link}</a>`;
+    });
+  </script>
+</body>
+</html>

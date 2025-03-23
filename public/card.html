@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { background: linear-gradient(45deg, #ffd1dc, #ff748c); height: 100vh; display: flex; justify-content: center; align-items: center; font-family: 'Arial', sans-serif; }
+    .card { width: 90%; max-width: 600px; padding: 20px; background: white; border-radius: 15px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); text-align: center; }
+    .card-title { font-family: 'Georgia', serif; font-size: 36px; color: #ff4081; }
+    .message-content { font-size: 16px; color: #444; margin: 20px 0; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1 class="card-title" id="recipient">To: [Recipient]</h1>
+    <div class="message-content" id="message">[Message]</div>
+  </div>
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
+    if (id) {
+      fetch(`/card/${id}`)
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById('recipient').textContent = `To: ${data.recipient}`;
+          document.getElementById('message').textContent = data.message;
+        })
+        .catch(err => console.error('Error fetching card:', err));
+    }
+  </script>
+</body>
+</html>
